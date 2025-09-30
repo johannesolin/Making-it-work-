@@ -1,0 +1,67 @@
+#map {
+    height: 400px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  body { margin: 0; font-family: "Helvetica", Arial; }
+  main { padding: 1rem; max-width: 900px; margin: 0 auto; }
+  header { padding: 1rem; background: #f3f4f6; }
+
+  .timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Den vertikale linjen */
+  .timeline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    margin-left: -2px;
+    background: #ccc;
+  }
+  
+  /* Elementene */
+  .timeline-item {
+    position: relative;
+    width: 41.1%;
+    padding: 10px 40px;
+  }
+  
+  .timeline-item.left  { left: 0; }
+  .timeline-item.right { left: 50%; }
+  
+  /* Sirklene */
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #666;
+    z-index: 1;
+    right: -11px;
+  }
+  .timeline-item.right::after {
+    left: -11px;
+    right: auto;
+  }
+  
+  /* Innholdsboks */
+  .card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .card h3 { margin: 0 0 8px; }
+
