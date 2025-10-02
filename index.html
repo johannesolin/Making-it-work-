@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Game of Modes</title>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet JS -->
+  <script
+    defer
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <!-- kartkode -->
+  <script defer src="map.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Making it Work</h1>
+  </header>
+
+  <main>
+    <section>
+      <article>
+        <h2>Game of Modes</h2>
+        <p>A game where you can switch between different modes to solve puzzles and challenges.</p>
+      </article>
+
+      <article>
+        <h2>Photo</h2>
+        <img src="Assets/fff.png" alt="600x400" width="600" height="400">
+      </article>
+
+      <article>
+        <h2>Audio</h2>
+        <audio controls>
+          <source src="Assets/827540__qubodup__dog-shake-off.wav" type="audio/wav">
+          Nettleseren din støtter ikke lyd-elementet.
+        </audio>
+      </article>
+
+      <article>
+        <h2>Video</h2>
+        <video controls width="600" poster="Assets/ggg.JPG">
+          <source src="Assets/pull1.mp4" type="video/mp4">
+        </video>
+        <p>Her bruker jeg det innebygde video elementet med en MP4-kilde og standardkontroller, som er den enkleste måten å vise video på i ren HTML.</p>
+        <p>Alternativt kunne jeg brukt et JavaScript-bibliotek for mer avanserte funksjoner som f.eks kontroller, undertekster osv.</p>
+        <p>Kan også hente inn video fra en ekstern kilde, ved å bruke iframe-element.</p>
+
+
+        <p>Dette er en av videoene vi har fått tilsendt ifbm intervjuene. Den gir et lite glimt inn i deres perspektiv. <span style="color: red; font-size: 1.1em;">Som avtalt i kontrakten er den kun for lærere og eksaminator.</span></p>
+
+        <p>Det er brukt Ai for å fjerne metadata fra videoen.</p>
+      </article>
+
+      <article>
+        <h2>Kart</h2>
+        <!-- Her tegnes kartet -->
+        <div id="map" aria-label="Interaktivt kart"></div>
+      </article>
+    </section>
+
+    <!--Tidslinje. med hjelp fra https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_timeline-->
+    <section aria-labelledby="timeline-heading">
+        <h2 id="timeline-heading">Tidslinje</h2>
+      
+        <ol class="timeline" role="list">
+          <li class="timeline-item left">
+            <article class="card">
+              <h3>22.september</h3>
+              <p>Prosjektet startet.</p>
+            </article>
+          </li>
+      
+          <li class="timeline-item right">
+            <article class="card">
+              <h3>30. september</h3>
+              <p>prosjekt finpusset</p>
+            </article>
+          </li>
+      
+          <li class="timeline-item left">
+            <article class="card">
+              <h3>2.oktober</h3>
+              <p>Prosjektet levert.</p>
+            </article>
+          </li>
+        </ol>
+      </section>
+
+      <h2>Infoviz</h2>
+<div id="wordcloud"></div>
+
+<!-- Bibliotek for ordsky -->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-cloud/build/d3.layout.cloud.js"></script>
+
+<script>
+  const words = [
+    {text: "HTML", size: 40},
+    {text: "CSS", size: 30},
+    {text: "JavaScript", size: 25},
+    {text: "Data", size: 20},
+    {text: "Visualization", size: 35},
+    {text: "Storytelling", size: 28}
+  ];
+
+  const layout = d3.layout.cloud()
+    .size([500, 300])
+    .words(words)
+    .padding(5)
+    .rotate(() => ~~(Math.random() * 2) * 90)
+    .font("Impact")
+    .fontSize(d => d.size)
+    .on("end", draw);
+
+  layout.start();
+
+  function draw(words) {
+    d3.select("#wordcloud")
+      .append("svg")
+      .attr("width", 500)
+      .attr("height", 300)
+      .append("g")
+      .attr("transform", "translate(250,150)")
+      .selectAll("text")
+      .data(words)
+      .enter().append("text")
+      .style("font-size", d => d.size + "px")
+      .style("font-family", "Impact")
+      .style("fill", "steelblue")
+      .attr("text-anchor", "middle")
+      .attr("transform", d => "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")")
+      .text(d => d.text);
+  }
+</script>
+
+<p>Her bruker jeg d3.js til å lage en enkel ordsky som visualiserer nøkkelord. Alternativt kunne jeg laget et nettverk av noder, en Sankey-graf eller en interaktiv treemap.</p>
+  </main>
+</body>
+</html>
